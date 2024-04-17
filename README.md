@@ -9,6 +9,29 @@ This repository hosts the development of the Side Processing Channels (SPC) for 
 ## Project Description
 The SPC framework is designed to alleviate network strain by introducing auxiliary pathways for transactions when the main blockchain experiences high traffic. This approach helps maintain high throughput and reduce transaction latency across the network.
 
+## Current Status and Next Steps
+### Current Implementation
+As of now, we have laid the foundational designs for the Side Processing Channels (SPC) and started preliminary development on smart contracts for transaction bundling. These initial steps are crucial as they set the groundwork for more complex integrations and optimizations.
+
+### Planned Enhancements
+- **Q3 2024**: Enhance the smart contract logic to include more sophisticated bundling techniques that can dynamically adjust based on network conditions.
+- **Q4 2024**: Expand the dynamic congestion management algorithms to include machine learning techniques for predicting peak congestion times and optimizing transaction routing.
+- **Q1 2025**: Begin integrating these technologies into the main Solana network, initially in a controlled testnet environment.
+
+### How to Contribute
+We are in the early stages of development and actively seeking contributors for:
+- Coding and testing smart contracts.
+- Developing and refining congestion management algorithms.
+- Providing feedback on design and functionality through testnet trials.
+
+Your contributions at this stage can significantly shape the future of this project. Please see our `CONTRIBUTING.md` for detailed instructions on how to get involved.
+
+## Looking Ahead
+This project is an ongoing effort that will evolve based on network demands and community feedback. We are committed to transparency and collaboration, ensuring that the development process is inclusive and aligned with the needs of the Solana community.
+
+## Contact Information
+For more details on the project status or to get involved, please contact us through GitHub.
+
 ### Key Features
 - **Transaction Bundling**: Aggregates multiple transactions into a single bundle to minimize processing delay and network load.
 - **Dynamic Congestion Management**: Implements adaptive algorithms that assess network conditions in real-time and reroute or prioritize transactions to maintain efficient network operation.
@@ -32,9 +55,9 @@ Instructions for setting up the development environment will be provided as the 
 We encourage contributions from the community, whether it's code, documentation, or issue reports. Please see the `CONTRIBUTING.md` for how to get involved.
 
 ## Roadmap
-- **Q1 2024**: Develop initial smart contracts for bundling transactions.
-- **Q2 2024**: Implement and test dynamic congestion management algorithms.
-- **Q3 2024**: Integrate SPCs with the main Solana network and begin testnet trials.
+- **Q2 2024**: Develop initial smart contracts for bundling transactions.
+- **Q3 2024**: Implement and test dynamic congestion management algorithms.
+- **Q4 2024**: Integrate SPCs with the main Solana network and begin testnet trials.
 
 ## License
 Distributed under the MIT License. See `LICENSE` for more information.
