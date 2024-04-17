@@ -1,0 +1,77 @@
+use anchor_lang::prelude::*;
+
+declare_id!("YourProgramIDHere");
+
+#[program]
+pub mod transaction_bundling {
+    use super::*;
+    use anchor_lang::solana_program::entrypoint::ProgramResult;
+
+    pub fn create_transaction_bundle(ctx: Context<CreateBundle>, transactions: Vec<TransactionInput>) -> ProgramResult {
+        // Logic to bundle transactions together
+        // For simplicity, we're just counting the number of transactions bundled
+        let bundle_info = &mut ctx.accounts.bundle_info;
+        for transaction in transactions.iter() {
+            msg!("Processing transaction: {:?}", transaction);
+            // Add your logic here to process each transaction
+            // For example, summing up amounts, checking validity, etc.
+        }
+        bundle_info.total_transactions += transactions.len() as u64;
+        Ok(())
+    }
+}
+
+#[derive(Accounts)]
+pub struct CreateBundle<'info> {
+    #[account(init, payer = user, space = 8 + 40)]
+    pub bundle_info: Account<'info, BundleInfo>,
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>,
+}
+
+#[account]
+pub struct BundleInfo {
+    pub total_transactions: u64,
+}
+
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, Debug)]
+pub struct TransactionInput {
+    // Example transaction fields
+    pub recipient: Pubkey,
+    pub amount: u64,
+}
+
+pub fn create_transaction_bundle(ctx: Context<CreateBundle>, transactions: Vec<TransactionInput>) -> ProgramResult {
+    let bundle_info = &mut ctx.accounts.bundle_info;
+    
+    // Placeholder for the aggregated transaction data
+    let mut total_amount: u64 = 0;
+
+    for transaction in transactions.iter() {
+        // Validate each transaction
+        // Example validation: check transaction amount is non-zero and less than a maximum value
+        if transaction.amount == 0 || transaction.amount > MAX_TRANSACTION_AMOUNT {
+            msg!("Transaction amount validation failed");
+            return Err(ProgramError::InvalidInstructionData);
+        }
+        
+        // Example validation: ensure recipient is not the zero pubkey
+        if transaction.recipient == Pubkey::default() {
+            msg!("Recipient validation failed");
+            return Err(ProgramError::InvalidInstructionData);
+        }
+
+        // If validations pass, aggregate data
+        total_amount += transaction.amount;
+    }
+
+    if total_amount > 0 {
+        // Process the aggregated transaction here
+        // This could involve creating a new bundled transaction account, sending funds, etc.
+        msg!("Processing bundled transaction with total amount: {}", total_amount);
+    }
+
+    bundle_info.total_transactions += transactions.len() as u64;
+    Ok(())
+}
