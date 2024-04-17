@@ -1,0 +1,7 @@
+fn check_and_activate_spc(current_state: NetworkState) {
+    if predict_congestion(current_state.transaction_data) {
+        activate_spc();
+    } else {
+        deactivate_spc();
+    }
+}
