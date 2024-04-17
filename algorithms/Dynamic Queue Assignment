@@ -1,0 +1,8 @@
+fn assign_to_queue(transaction: Transaction) {
+    let priority = prioritize_transaction(transaction.context);
+    match priority {
+        10 => high_priority_queue.push(transaction),
+        5...9 => medium_priority_queue.push(transaction),
+        _ => low_priority_queue.push(transaction),
+    }
+}
