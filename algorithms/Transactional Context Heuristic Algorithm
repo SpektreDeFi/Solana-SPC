@@ -1,0 +1,8 @@
+fn prioritize_transaction(context: TransactionContext) -> u32 {
+    match context {
+        TransactionContext::ConsensusCritical => 10,
+        TransactionContext::HighFee => 8,
+        TransactionContext::Regular => 5,
+        TransactionContext::LowPriority => 1,
+    }
+}
